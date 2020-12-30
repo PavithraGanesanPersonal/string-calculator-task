@@ -48,11 +48,48 @@ public class StringCalculator {
 	 */
 	private final List<Integer> toNumbers() {
 		List<Integer> list = new LinkedList<Integer>();
-		for (String num : inputString.replace("\n", ",").split(",")) {
-			list.add(Integer.parseInt(num));
+		for (String num : inputString.replace("\n", delimiter()).split(delimiter())) {
+			list.add(toInt(num));
 		}
 
 		return list;
+	}
+
+	/**
+	 * Method to handle handle format exception while inputting with custom
+	 * delimiters
+	 * @param inputString
+	 * @return integer
+	 */
+	private static final Integer toInt(String s) {
+		try {
+			return Integer.parseInt(s);
+		} catch (NumberFormatException nfe) {
+			return 0;
+		}
+	}
+	/**
+	 * delimiter method is to replace the \n to comma
+	 * @return the comma
+	 */
+	private String delimiter() {
+		return hasCustomDelimiter() ? customDelimiter() : ",";
+	}
+
+	/**
+	 * customDelimiter is to get the delimiter in the inputString
+	 * @return delimiter
+	 */
+	private String customDelimiter() {
+		return inputString.substring(2, 3);
+	}
+
+	/**
+	 * hasCustomDelimiter is to check whether the delimiter is present
+	 * @return boolean value
+	 */
+	private boolean hasCustomDelimiter() {
+		return inputString.startsWith("//");
 	}
 
 }
