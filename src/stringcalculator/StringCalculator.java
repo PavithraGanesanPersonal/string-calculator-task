@@ -1,5 +1,6 @@
 package stringcalculator;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -92,4 +93,45 @@ public class StringCalculator {
 		return inputString.startsWith("//");
 	}
 
+	/**
+	 * Method to throw exception for negative number inputs
+	 */
+	private void throwIfNegatives() {
+        List<Integer> negatives = filterForNegativeNumbers();
+
+        if (!negatives.isEmpty()) {
+            throw new IllegalArgumentException(formatExceptionMessage(negatives));
+        }
+    }
+
+	/**
+	 * FormatExceptionMessage for negative numbers
+	 * @param negative numbers
+	 * @return the message to be thrown
+	 */
+    private static String formatExceptionMessage(List<Integer> negatives) {
+        StringBuilder sb = new StringBuilder("Negatives not allowed: ");
+
+        for (Iterator<Integer> itr = negatives.iterator(); itr.hasNext();) {
+            sb.append(itr.next());
+
+            if (itr.hasNext()) sb.append(", ");
+        }
+
+        return sb.toString();
+    }
+    
+    /**
+     * Method to list out the negative numbers in the given numbers
+     * @return negative numbers list
+     */
+    private List<Integer> filterForNegativeNumbers() {
+        List<Integer> negatives = new LinkedList<Integer>();
+        for (Integer num : toNumbers()) {
+            if (num < 0) {
+                negatives.add(num);
+            }
+        }
+        return negatives;
+    }
 }

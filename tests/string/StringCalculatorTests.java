@@ -53,5 +53,16 @@ public class StringCalculatorTests {
 
 		return sb.append("20").toString();
 	}
+	
+    @Test
+    public void includesNegativesInTheErrorMessage() {
+        try {
+            new StringCalculator("-1,4,-19,53").add();
+        }
+        catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is(equalTo("Negatives not allowed: -1, -19")));
+        }
+    }
+
 
 }
