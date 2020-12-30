@@ -43,6 +43,13 @@ public class StringCalculatorTests {
 		assertThat(new StringCalculator("//;\n5;2;3").add(), is(equalTo(10)));
 		assertThat(new StringCalculator("//x\n6x3x10x23").add(), is(equalTo(42)));
 	}
+	
+	@Test
+	public void ignoreNumbersGreaterThanThousand() {
+		assertThat(new StringCalculator("2,1001").add(), is(equalTo(2)));
+		assertThat(new StringCalculator("3,4000,3000").add(), is(equalTo(3)));
+	}
+
 
 	private String oneHundredTwenties() {
 		StringBuilder sb = new StringBuilder();

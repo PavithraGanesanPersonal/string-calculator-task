@@ -50,7 +50,10 @@ public class StringCalculator {
 	private final List<Integer> toNumbers() {
 		List<Integer> list = new LinkedList<Integer>();
 		for (String num : inputString.replace("\n", delimiter()).split(delimiter())) {
-			list.add(toInt(num));
+			Integer integerValue = toInt(num);
+			if(integerValue < 1000) {
+				list.add(toInt(num));	
+			}
 		}
 
 		return list;
