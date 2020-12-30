@@ -48,7 +48,7 @@ public class StringCalculator {
 	 */
 	private final List<Integer> toNumbers() {
 		List<Integer> list = new LinkedList<Integer>();
-		for (String num : inputString.split(",")) {
+		for (String num : inputString.replace("\n", ",").split(",")) {
 			list.add(Integer.parseInt(num));
 		}
 
